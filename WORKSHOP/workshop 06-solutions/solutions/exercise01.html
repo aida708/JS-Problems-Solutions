@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 01</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      #colorChangeBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="colorChangeBtn">Click me one time only!</button>
+    <script>
+      let intervalId = null;
+
+      document
+        .getElementById('colorChangeBtn')
+        .addEventListener('click', function () {
+          if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
+
+          intervalId = setInterval(changeBackgroundColor, 3000);
+        });
+
+      function changeBackgroundColor() {
+        const randomColor =
+          '#' + Math.floor(Math.random() * 16777215).toString(16);
+        document.body.style.backgroundColor = randomColor;
+      }
+    </script>
+  </body>
+</html>

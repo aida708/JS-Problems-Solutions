@@ -1,0 +1,71 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 02</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .timer-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="timer">60</div>
+    <button id="startButton" class="timer-button">Start</button>
+    <button id="pauseButton" class="timer-button">Pause</button>
+    <button id="resetButton" class="timer-button">Reset</button>
+
+    <script>
+      let time = 60;
+      let intervalId = null;
+
+      document
+        .getElementById('startButton')
+        .addEventListener('click', function () {
+          if (!intervalId) {
+            intervalId = setInterval(countdown, 1000);
+          }
+        });
+
+      document
+        .getElementById('pauseButton')
+        .addEventListener('click', function () {
+          if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
+        });
+
+      document
+        .getElementById('resetButton')
+        .addEventListener('click', function () {
+          clearInterval(intervalId);
+          intervalId = null;
+          time = 60;
+          updateDisplay();
+        });
+
+      function countdown() {
+        if (time > 0) {
+          time--;
+          updateDisplay();
+        } else {
+          clearInterval(intervalId);
+          alert('Time is up!');
+        }
+      }
+
+      function updateDisplay() {
+        document.getElementById('timer').textContent = time;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 04</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container text-center mt-5">
+    <h1 class="mb-4">World Clock</h1>
+
+    <!-- Dropdown menu for time zones -->
+    <div class="form-group">
+      <label for="timezoneSelect" class="h5">Select a time zone:</label>
+      <select id="timezoneSelect" class="form-control" onchange="updateClock()">
+        <option value="America/New_York">New York</option>
+        <option value="Europe/London">London</option>
+        <option value="Asia/Tokyo">Tokyo</option>
+        <!-- Add more options if you want -->
+      </select>
+    </div>
+
+    <!-- Display the current time in the selected time zone -->
+    <div id="clock" class="h3 mt-3"></div>
+    <script>
+      let intervalId;
+
+      const select = document.getElementById('timezoneSelect');
+      select.addEventListener('change', function () {
+        const selectedTimezone = select.value;
+
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+
+        const clockElement = document.getElementById('clock');
+
+        intervalId = setInterval(() => {
+          const now = new Date();
+          const options = {
+            timeZone: selectedTimezone,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          };
+          const result = new Intl.DateTimeFormat('en-US', options).format(now);
+          clockElement.textContent = `Current time (${selectedTimezone}): ${result}`;
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

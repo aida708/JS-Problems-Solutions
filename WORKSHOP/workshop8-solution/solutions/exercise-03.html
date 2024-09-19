@@ -1,0 +1,53 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 03</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container text-center mt-5">
+    <h1 class="mb-4">Age Calculator</h1>
+    <label for="birthdate" class="h5">Enter your birthdate:</label>
+    <input type="date" id="birthdate" class="form-control mb-3" />
+    <button id="calculateAge" onclick="calculateAge()" class="btn btn-primary">
+      Calculate Age
+    </button>
+    <div id="result" class="h3 mt-3"></div>
+
+    <script>
+      const calculateBtn = document.getElementById('calculateAge');
+
+      calculateBtn.addEventListener('click', function () {
+        const userInput = document.getElementById('birthdate').value;
+
+        const now = new Date();
+        const birthdate = new Date(userInput);
+
+        const years = now.getFullYear() - birthdate.getFullYear();
+        const months = now.getMonth() - birthdate.getMonth();
+        const days = now.getDate() - birthdate.getDate();
+
+        let finalMonths;
+        let finalDays;
+
+        if (months === 0) {
+          finalMonths = months + 1;
+        } else {
+          finalMonths = months;
+        }
+
+        if (days < 0) {
+          finalDays = days * -1;
+        }
+
+        const result = document.getElementById('result');
+        result.textContent = `Your age is: ${years} years and ${finalMonths} months and ${finalDays} days year old`;
+      });
+    </script>
+  </body>
+</html>

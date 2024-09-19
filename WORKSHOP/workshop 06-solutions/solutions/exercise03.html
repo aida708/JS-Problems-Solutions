@@ -1,0 +1,59 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 03</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      #itemInput,
+      .list-button {
+        padding: 10px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="itemInput" placeholder="Enter item" />
+    <button id="addItemButton" class="list-button">Add Item</button>
+    <button id="clearListButton" class="list-button">Clear List</button>
+
+    <ul id="itemList"></ul>
+
+    <script>
+      let itemList = [];
+
+      document
+        .getElementById('addItemButton')
+        .addEventListener('click', function () {
+          const itemValue = document.getElementById('itemInput').value.trim();
+          if (itemValue) {
+            itemList.push({ text: itemValue });
+            updateListDisplay();
+            document.getElementById('itemInput').value = ''; // Clear input field
+          }
+        });
+
+      document
+        .getElementById('clearListButton')
+        .addEventListener('click', function () {
+          itemList = [];
+          updateListDisplay();
+        });
+
+      function updateListDisplay() {
+        const listContainer = document.getElementById('itemList');
+        listContainer.innerHTML = ''; // Clear existing list
+
+        for (let i = 0; i < itemList.length; i++) {
+          const listItem = document.createElement('li');
+          listItem.textContent = itemList[i].text;
+          listContainer.appendChild(listItem);
+        }
+      }
+    </script>
+  </body>
+</html>

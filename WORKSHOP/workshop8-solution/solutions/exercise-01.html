@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 01</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container p-5">
+    <h1 class="text-center mb-4">Event Countdown Timer</h1>
+    <div id="countdown" class="text-center font-weight-bold mb-3">
+      <span id="days"></span> days, <span id="hours"></span> hours,
+      <span id="minutes"></span> minutes, <span id="seconds"></span> seconds
+    </div>
+    <div class="text-center">
+      <input
+        type="datetime-local"
+        id="newEventDate"
+        class="form-control mb-2"
+      />
+      <button id="setDateButton" class="btn btn-primary">
+        Set New Event Date
+      </button>
+    </div>
+
+    <script>
+      const countdownButton = document.getElementById('setDateButton');
+      countdownButton.addEventListener('click', function () {
+        const newDate = document.getElementById('newEventDate').value;
+        const targetDate = new Date(eventDate);
+
+        setInterval(function () {
+          const now = new Date();
+          const timeLeft = targetDate - now;
+
+          const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (timeLeft % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+          document.getElementById('days').textContent = days;
+          document.getElementById('hours').textContent = hours;
+          document.getElementById('minutes').textContent = minutes;
+          document.getElementById('seconds').textContent = seconds;
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
