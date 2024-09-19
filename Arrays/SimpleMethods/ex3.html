@@ -1,0 +1,33 @@
+<!-- 
+Define an array with numbers from 1-10.
+2. Iterate over the array using for, while or do-while
+3. Split half of the array into a new array in
+(Hint: you can use both push and shift to achieve this)
+4. The end result should look like:  array = [6,7,8,9,10];  arrayNew = [1,2,3,4,5]; -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<p id="demo"></p>
+    <script>
+
+        const array = [1,2,3,4,5,6,7,8,9,10];
+        const arrayNew = [];
+
+        for (let i = 0; i <= array.length; i++) {
+            if (i < 5) {
+                arrayNew.push(array.shift());
+            } 
+        }
+
+document.getElementById("demo").innerHTML = `array = ${array}; arrayNew = ${arrayNew}`;
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body onload="Onload()">
+    <div class="container border border-secondary-subtle mt-5 p-4">
+        <div class="row g-3" id="Persons">
+            <div class="col d-flex justify-content-center align-items-center">
+                <span id="childrenCount" class="mt-2"></span>
+            </div>
+            <div class="col">
+                <label for="nameInput">Filter List of Persons by Name</label>
+                <input type="text" class="form-control" id="nameInput" placeholder="Person name">
+            </div>
+            <div class="col">
+                <label for="nameInput">Filter List of Persons by Profession</label>
+                <select class="form-select" id="dropDownSelect">
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <ul class="list-group list-group-numbered" id="personsList">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        //#region Ex 1
+        const Pangram = (str) => {
+            const letters = "abcdefghijklmnopqrstuvwxyz";
+            return letters.split('').every(a => str.toLowerCase().includes(a));
+        };
+        const promptStr = prompt("Enter a string that includes all the letters on English alphabet!");
+        console.log(`The string "${promptStr}" is ${Pangram(promptStr) ? 'a pangram' : 'not a pangram'}.`);
+        alert(`The string "${promptStr}" is ${Pangram(promptStr) ? 'a pangram' : 'not a pangram'}.`);
+        //#endregion Ex 1
+
+        //#region Ex 2
+        let arr = [30, "text1", 10, 50, "text2", 60, 70, 33, 45, 67, "text3", 13, 34, "text"];
+        arr.forEach((O, i) => {
+            if (isNaN(O)) {
+                arr[i] = "NaN";
+            }
+        });
+
+        for (let i = 0; i < arr.length; i++) {
+            if (isNaN(arr[i])) {
+                arr[i] = "NaN";
+            }
+        }
+
+        arr.map((i, index) => {
+            if (isNaN(i)) {
+                arr[index] = "NaN";
+            }
+        });
+        //#endregion Ex 2
+
+        //#region Ex 3
+        class Person {
+            constructor(name, profession, sex, age) {
+                this.name = name;
+                this.profession = profession;
+                this.sex = sex;
+                this.age = age;
+            }
+        }
+
+        class Male extends Person {
+            constructor(name, profession, sex, age) {
+                super(name, profession, sex, age);
+            };
+            LiDrawFunction() {
+                let li = document.createElement("li");
+                li.classList.add("list-group-item", "d-flex", "justify-content-center", "align-items-center", "text-info", "text-center");
+                li.textContent = this.name;
+                return li;
+            };
+        }
+
+        class Female extends Person {
+            constructor(name, profession, sex, age) {
+                super(name, profession, sex, age);
+            };
+            LiDrawFunction() {
+                let li = document.createElement("li");
+                li.classList.add("list-group-item", "d-flex", "justify-content-center", "align-items-center", "text-danger", "text-center");
+                li.textContent = this.name;
+                return li;
+            };
+        }
+
+        let arrF = [
+            {
+                "name": "Charlotte Jones",
+                "profession": "Front-End Developer",
+                "sex": "F",
+                "age": 24
+            },
+            {
+                "name": "Rebecca Smith",
+                "profession": "High School",
+                "sex": "F",
+                "age": 17
+            }
+        ];
+
+        let arrM = [
+            {
+                "name": "John Smithy",
+                "profession": "High School",
+                "sex": "M",
+                "age": 16
+            },
+            {
+                "name": "John Smithy",
+                "profession": "Plumber",
+                "sex": "M",
+                "age": 22
+            },
+            {
+                "name": "Smith Jones",
+                "profession": "Front-End Developer",
+                "sex": "M",
+                "age": 26
+            }
+        ];
+
+        let arrPersons = arrM.concat(arrF);
+
+        let countChildren = arrPersons.filter(p => Number(p.age) < 19);
+        let childrenCount = document.getElementById("childrenCount");
+        childrenCount.textContent = `Children Count: ${countChildren.length}`;
+
+        const SortArr = (arr, attribute) => arr.sort((a, b) => a[attribute].toLowerCase().localeCompare(b[attribute].toLowerCase()));
+        const FilterArr = (arr, attribute, value) => arr.filter(p => p[attribute].toLowerCase().includes(value.toLowerCase()));
+
+        const Onload = () => {
+            let arrName = SortArr(arrPersons, "name");
+            CreateAndAddLiOnList(arrName);
+            CreateAndAddOptionOnDropDown(arrPersons);
+        };
+
+        const CreateAndAddLiOnList = (arr) => {
+            let ul = document.getElementById("personsList");
+            let arrLi = [];
+            arr.forEach(p => {
+                let li;
+                if (p.sex.toLowerCase() === "f") {
+                    li = new Female(p.name).LiDrawFunction();
+                }
+                else {
+                    li = new Male(p.name).LiDrawFunction();
+                }
+                arrLi.push(li);
+            });
+            ul.replaceChildren(...arrLi);
+        };
+
+        const FilterByNameOnInput = (e) => {
+            let ul = document.getElementById("personsList");
+            if (e.target.value.length >= 3) {
+                let arrPersonsFilter = FilterArr(arrPersons, "name", e.target.value);
+                CreateAndAddLiOnList(arrPersonsFilter, ul);
+            }
+            else {
+                CreateAndAddLiOnList(arrPersons, ul);
+            }
+        }
+
+        let nameInput = document.getElementById("nameInput");
+        nameInput.addEventListener("keyup", FilterByNameOnInput);
+        //#endregion Ex 3
+
+        //#region Ex 4
+        const OnChangeOptionOnDropDown = (e) => {
+            let ul = document.getElementById("personsList");
+            if (e.target.value && e.target.value != "----") {
+                let arrPersonsFilter = FilterArr(arrPersons, "profession", e.target.value);
+                CreateAndAddLiOnList(arrPersonsFilter, ul);
+            }
+            else {
+                CreateAndAddLiOnList(arrPersons, ul);
+            }
+        }
+
+        const CreateAndAddOptionOnDropDown = (arr) => {
+            let arrOpt = [];
+            let select = document.getElementById("dropDownSelect");
+            let optDefault = document.createElement("option");
+            optDefault.textContent = "----";
+            optDefault.selected = true;
+            arrOpt.push(optDefault);
+            let uniqProfession = arr.filter((o, i, self) => i === self.findIndex(p => p.profession === o.profession));
+            uniqProfession.forEach(p => {
+                let opt = document.createElement("option");
+                opt.value = p.profession;
+                opt.textContent = p.profession;
+                arrOpt.push(opt);
+            });
+            select.replaceChildren(...arrOpt);
+        }
+        let dropDownSelect = document.getElementById("dropDownSelect");
+        dropDownSelect.addEventListener("change", OnChangeOptionOnDropDown);
+        //#endregion Ex 4
+
+        //#region Ex 7
+
+        //#endregion Ex 7
+    </script>
+</body>
+
+</html>

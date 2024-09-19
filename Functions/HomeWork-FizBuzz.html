@@ -1,0 +1,54 @@
+<!-- Prompt for a number
+2. Define a function that:
+ a) Generates a DOM element from 1 up to a given number argument
+ b) For any number divisible by 3, print “Fizz” as the innerHTML of the DOM element.
+ c) For any number divisible by 5, print “Buzz” as the innerHTML of the DOM element.
+ d) For any number divisible by both 3 and 5, print “FizzBuzz” as the innerHTML of the DOM element.
+ e) For any other number, just print the value of that number as the innerHTML of the DOM element.
+ 3. Invoke the function using the number from the prompt as 1. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docuggggment</title>
+  </head>
+  <body>
+    <div id="demo"></div>
+
+    <script>
+      window.onload = function () {
+        let number = prompt("Enter a number:");
+        number = Number(number);
+        //ensure its a valid num
+        if (!isNaN(number) && number > 0) {
+          fizzBuzz(number);
+        } else {
+          alert("pls enter a valid number");
+        }
+      };
+
+      function fizzBuzz(limit) {
+        const container = document.getElementById("demo");
+        container.innerHTML = "";
+
+        for (let i = 1; i <= limit; i++) {
+          const element = document.createElement("P");
+
+          if (i % 3 === 0 && i % 5 === 0) {
+            element.innerHTML = "FizzBuzz";
+          } else if (i % 5 == 0) {
+            element.innerHTML = "Buzz";
+          } else if (i % 3 === 0) {
+            element.innerHTML = "Fizz";
+          } else {
+            element.innerHTML = i;
+          }
+
+          container.appendChild(element);
+        }
+      }
+    </script>
+  </body>
+</html>

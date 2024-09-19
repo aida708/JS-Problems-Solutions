@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+
+    <script>
+
+        // 1. Generate an array with numbers from 50-65.
+        let  myArray = Array.from({length: 16}, (_, i) => i + 50);
+        // 2. Remove the last element of the array, and that same element place it as
+        // first element on the array.
+
+        console.log('initial array', myArray);
+
+        let lastElement = myArray.pop();
+        myArray.unshift(lastElement);
+
+        console.log('new array', myArray);
+
+        // 3. Find the middle of that array and add a new element there
+        // ‘this is the middle of the array’.
+        const middle = Math.floor(myArray.length / 2);
+        myArray.splice(middle, 0, 'this is the middle of the array');
+
+        // 4. Make a copy of the array, which will not include the first and the last
+
+        let myArrayCopy = myArray.slice(1, -1);
+        console.log(myArrayCopy);
+
+        document.getElementById("demo").innerHTML = myArrayCopy;
+
+
+    </script>
+</body>
+</html>
+<!-- 
+1. Generate an array with numbers from 50-65.
+2. Remove the last element of the array, and that same element place it as first element on the array.
+3. Find the middle of that array and add a new element there ‘this is the middle of
+the array’.
+4. Make a copy of the array, which will not include the first and the last element of it.
+5. You should get the following result in console:
+[50, 51, 52, 53, 54, 55, 56, "this is the middle of the array", 57, 58, 59, 60, 61, 62, 63] -->

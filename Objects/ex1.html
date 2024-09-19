@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>Population</th>
+        </tr>
+    </thead>
+
+    <tbody id="tableBody"></tbody>
+</table>
+
+
+    <script>
+        //create an object for cities and their population
+
+        const cities = {
+            London: 8000,
+            Paris: 7000,
+            Berlin: 3000,
+            Rome: 4000
+        };
+        //create a table 
+        const tableBody = document.getElementById('tableBody');
+
+        //loop through the object
+        Object.entries(cities).forEach((city) => {
+           const tr = document.createElement('tr');
+           const td1 = document.createElement('td');
+           const td2 = document.createElement('td');
+           td1.innerText = city[0];           //add the cells
+           td2.innerText = city[1];
+//dynamically adds the rows based on the cities object
+
+           tr.appendChild(td1);  //dynamically adds the cells
+           tr.appendChild(td2);
+           tableBody.appendChild(tr);   //dynamically adds the rows to the table
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- Generate an array with numbers from 1-100.
+2. Iterate over the array using for, while or do-while
+3. Using the FizzBuzz rules from the previous homework, replace the array
+members as follows:
+let myArray = [1, 2, 3, 4, 5 .... 100];
+myArray = [1, 2, ‘Fizz’, 4, ‘Buzz’ ... ];
+(Hint: use splice ) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+
+    <script>
+        const myArray = Array.from({length: 100}, (_, i) => i + 1);
+
+        for(let i = 1; i <= myArray.length; i++){
+            let value = myArray[i];
+            if(i % 3 === 0 && i % 5 === 0){
+                myArray.splice(i, 1, "FizzBuzz");   //splice to replace the value with FizzBuzz
+            }else if(i % 3 === 0){
+                myArray.splice(i, 1, "Fizz");
+            }else if(i % 5 === 0){
+                myArray.splice(i, 1, "Buzz");
+            }
+            console.log(i);
+        }
+        
+        document.getElementById("demo").innerHTML = `myArray = [(${myArray.join(", ")})]`;  //prints the array using template literal
+    </script>
+    
+</body>
+</html>
