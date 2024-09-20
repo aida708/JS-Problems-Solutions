@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 02</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <p id="productList"></p>
+    <script>
+      //class Product with properties name and price, add a method  to Product that calculates the price after tax
+      //display the product in the DOM
+
+      const productList = document.querySelector("#productList");
+
+      class Product {
+        constructor(name, price) {
+          this.name = name;
+          this.price = price;
+        }
+      
+      calculateTax = (price) => {
+        return price * 1.5;
+      };
+
+
+      display() {
+        console.log(`product name : ${this.name}, price: ${this.price}, tax: ${this.calculateTax(this.price)}`);
+        const productDiv = document.createElement("div");
+        productDiv.innerHTML = `product name : ${this.name}, price: ${
+          this.price
+        }, tax: ${this.calculateTax(this.price)}`;
+        productDiv.className = "alert alert-primary";
+        productList.appendChild(productDiv);
+      };
+}
+      const products = [
+      new Product('Laptop', 1000),
+      new Product('Phone', 500),
+      new Product('Watch', 200),
+      ];
+
+
+      products.forEach((product) => {
+        product.display();
+      });
+    </script>
+  </body>
+</html>

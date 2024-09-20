@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 01</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="studentList" class="container mt-5"></div>
+<!--     
+    CREATE A class Student with the following properties: name, age, and id and 
+    a method to display these properties in the DOM.
+    USE Loops -->
+    <script>
+      // Example usage
+      // const students = [new Student('Alice', 20), new Student('Bob', 22)];
+
+      const studentList = document.querySelector('#studentList');
+
+      class Student {
+        constructor(name, age, id) {
+          this.name = name;   //CREATE THE PROPERTIES OF THE CLASS
+          this.age = age;
+          this.id = id;
+        }
+
+        display() {
+          console.log(`students name: ${this.name}, age: ${this.age}, id: ${this.id}`);
+          const StudentDiv = document.createElement('div');
+          StudentDiv.innerHTML = `students name: ${this.name}, age: ${this.age}, id: ${this.id}`;
+          StudentDiv.className = 'alert alert-primary';
+          studentList.appendChild(StudentDiv);
+        }
+}
+
+        const students = [
+        new Student('Elda', 26, 1),
+        new Student('Aida', 24, 2),
+        new Student('Eli', 21, 3),
+        new Student('Lili', 48, 4),
+        new Student('Fatos', 51, 5),
+        
+        ];
+
+        students.forEach((student) => {
+          student.display();
+        });
+
+      
+      </script>
+  </body>
+</html>

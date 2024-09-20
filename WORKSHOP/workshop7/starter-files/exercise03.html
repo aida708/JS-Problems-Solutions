@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 03</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script>
+      // Example usage
+      // const person1 = new Person('John', 30);
+
+      class Person {
+        constructor(name, age){
+          this.name = name;
+          this.age = age;
+        }
+
+       
+      }
+      
+      const People = [
+        new Person ('John', 30),
+        new Person ('Jane', 25),
+        new Person ('Bob', 40),
+      ]
+
+     function addMethodToPerson(methodName, method) {
+       Person.prototype[methodName] = method;
+     }
+
+     addMethodToPerson('showAge', function() {
+      alert(`Age is : ${this.age}`);
+     })
+
+     addMethodToPerson('showName', function() {
+      alert(`Name is : ${this.name}`);
+     })
+
+    const person1 = new Person('John', 30);
+
+    person1.showName();
+    person1.showAge();
+
+      
+
+    </script>
+  </body>
+</html>
